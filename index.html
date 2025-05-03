@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
- <head>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Счетчик калорий</title>
     <link rel="stylesheet" href="style.css">
-
-
-
-
-
-
-
-
 </head>
 <body>
-
-
-    
-
-
-
-<script src="script.js"></script>
-</body>
-
+    <div class="container">
+        <h1>Счетчик калорий</h1>
+        
+        <div class="form-group">
+            <label for="food">Продукт:</label>
+            <input type="text" id="food" placeholder="Например: Яблоко">
+        </div>
+        
+        <div class="form-group">
+            <label for="calories">Калории (на 100г):</label>
+            <input type="number" id="calories" placeholder="Калории на 100 грамм">
+        </div>
+        
+        <div class="form-group">
+            <label for="weight">Вес (граммы):</label>
+            <input type="number" id="weight" placeholder="Вес в граммах" value="100">
+        </div>
+        
+        <button onclick="addFood()">Добавить</button>
+    </div>
+    <script src="script.js"></script>
+</html>
