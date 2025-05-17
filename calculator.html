@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расчет калорий</title>
+    <link rel="stylesheet" href="CalculatorCal/style.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Расчет калорийности</h1>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label for="food">Блюдо:</label>
+                <div class="food-input-container">
+                    <input type="text" id="food" placeholder="Название блюда" list="foodList">
+                    <button id="saveFoodBtn" class="small-btn">Сохр</button>
+                </div>
+                <datalist id="foodList"></datalist>
+            </div>
+            
+            <div class="input-group">
+                <label for="weight">Вес (граммы):</label>
+                <input type="number" id="weight" min="1" placeholder="Вес в граммах">
+            </div>
+            
+            <div class="input-group">
+                <label for="calories">Калории (на 100г):</label>
+                <input type="number" id="calories" min="1" placeholder="Ккал на 100г">
+            </div>
+            
+            <div class="input-group">
+                <label for="protein">Белки (на 100г):</label>
+                <input type="number" id="protein" min="0" step="0.1" placeholder="г на 100г">
+            </div>
+            
+            <div class="input-group">
+                <label for="fats">Жиры (на 100г):</label>
+                <input type="number" id="fats" min="0" step="0.1" placeholder="г на 100г">
+            </div>
+            
+            <button id="calculateButton">ПОСЧИТАТЬ</button>
+        </div>
+        
+        <div class="result-section" id="resultSection" style="display: none;">
+            <h2>Результаты для: <span id="foodName"></span></h2>
+            
+            <div class="circle-container">
+                <div class="circle" id="caloriesCircle">
+                    <div class="circle-value" id="totalCalories">0</div>
+                    <div class="circle-label">ккал</div>
+                </div>
+                
+                <div class="macros-circles">
+                    <div class="small-circle" id="proteinCircle">
+                        <div class="circle-value" id="totalProtein">0</div>
+                        <div class="circle-label">белки</div>
+                    </div>
+                    
+                    <div class="small-circle" id="fatsCircle">
+                        <div class="circle-value" id="totalFats">0</div>
+                        <div class="circle-label">жиры</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="history-section">
+                <h3>История расчетов:</h3>
+                <div class="food-list" id="foodList"></div>
+            </div>
+            
+            <div class="buttons-container">
+                <button id="backButton">На главную</button>
+                <button id="addMoreButton">Новый расчет</button>
+            </div>
+        </div>
+    </div>
+    <script src="CalculatorCal/script.js"></script>
+</body>
+</html>
