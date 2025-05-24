@@ -10,14 +10,14 @@ const App = {
     },
     
     setupNavigation: function() {
-        // ������� �� �������� ������������
+        // Переход на страницу калькулятора
         if (document.getElementById('startButton')) {
             document.getElementById('startButton').addEventListener('click', () => {
                 window.location.href = 'calculator.html';
             });
         }
         
-        // ������� �� �������
+        // Возврат на главную
         if (document.getElementById('backButton')) {
             document.getElementById('backButton').addEventListener('click', () => {
                 window.location.href = 'index.html';
@@ -26,22 +26,22 @@ const App = {
     },
     
     setupEventListeners: function() {
-        // �����������
+        // Калькулятор
         if (document.getElementById('calculateButton')) {
             document.getElementById('calculateButton').addEventListener('click', () => this.calculateNutrition());
         }
         
-        // �������� ����� ������
+        // Добавить новый расчет
         if (document.getElementById('addMoreButton')) {
             document.getElementById('addMoreButton').addEventListener('click', () => this.resetForm());
         }
         
-        // ��������� �����
+        // Сохранить блюдо
         if (document.getElementById('saveFoodBtn')) {
             document.getElementById('saveFoodBtn').addEventListener('click', () => this.saveFood());
         }
         
-        // �������������� ��� ������ �����
+        // Автозаполнение при выборе блюда
         if (document.getElementById('food')) {
             document.getElementById('food').addEventListener('change', (e) => this.autofillFoodData(e.target.value));
         }
@@ -76,7 +76,7 @@ const App = {
         const fats = document.getElementById('fats').value;
         
         if (!foodName || !calories || !protein || !fats) {
-            alert('��������� ��� ���� ��� ���������� �����');
+            alert('Заполните все поля для сохранения блюда');
             return;
         }
         
@@ -87,43 +87,43 @@ const App = {
             fatsPer100g: parseFloat(fats)
         };
         
-        // ���������, ���� �� ��� ����� �����
+        // Проверяем, есть ли уже такое блюдо
         const existingIndex = this.foodDatabase.findIndex(food => food.name === foodName);
         if (existingIndex >= 0) {
-            // ��������� ������������
+            // Обновляем существующее
             this.foodDatabase[existingIndex] = foodData;
         } else {
-            // ��������� �����
+            // Добавляем новое
             this.foodDatabase.push(foodData);
         }
         
-        // ��������� � localStorage
+        // Сохраняем в localStorage
         localStorage.setItem('foodDatabase', JSON.stringify(this.foodDatabase));
         this.loadFoodDatabase();
-        alert(`����� "${foodName}" ���������!`);
+        alert(`Блюдо "${foodName}" сохранено!`);
     },
     
     calculateNutrition: function() {
-        // �������� ������ �� �����
+        // Получаем данные из формы
         const foodName = document.getElementById('food').value.trim();
         const weight = parseFloat(document.getElementById('weight').value);
         const caloriesPer100g = parseFloat(document.getElementById('calories').value);
         const proteinPer100g = parseFloat(document.getElementById('protein').value);
         const fatsPer100g = parseFloat(document.getElementById('fats').value);
         
-        // ��������� ���������� �����
+        // Проверяем заполнение полей
         if (!foodName || !weight || !caloriesPer100g || isNaN(proteinPer100g) || isNaN(fatsPer100g)) {
-            alert('����������, ��������� ��� ����');
+            alert('Пожалуйста, заполните все поля');
             return;
         }
         
-        // ������������ ������� ��������
+        // Рассчитываем пищевую ценность
         const ratio = weight / 100;
         const totalCalories = Math.round(caloriesPer100g * ratio);
         const totalProtein = (proteinPer100g * ratio).toFixed(1);
         const totalFats = (fatsPer100g * ratio).toFixed(1);
         
-        // ��������� � �������
+        // Сохраняем в историю
         this.foodHistory.push({
             name: foodName,
             weight: weight,
@@ -133,24 +133,24 @@ const App = {
             timestamp: new Date().toLocaleString()
         });
         
-        // ���������� ����������
+        // Отображаем результаты
         this.displayResults(foodName, totalCalories, totalProtein, totalFats);
     },
     
     displayResults: function(foodName, calories, protein, fats) {
-        // ������������� ��������
+        // Устанавливаем значения
         document.getElementById('foodName').textContent = foodName;
         document.getElementById('totalCalories').textContent = calories;
         document.getElementById('totalProtein').textContent = protein;
         document.getElementById('totalFats').textContent = fats;
         
-        // �������� ������
+        // Анимация кругов
         this.animateCircles();
         
-        // ��������� �������
+        // Обновляем историю
         this.updateHistory();
         
-        // ���������� ������ � ������������
+        // Показываем секцию с результатами
         document.getElementById('resultSection').style.display = 'block';
     },
     
@@ -182,8 +182,8 @@ const App = {
             const foodItem = document.createElement('div');
             foodItem.className = 'food-item';
             foodItem.innerHTML = `
-                <span>${item.name} (${item.weight}�)</span>
-                <span>${item.calories} ����</span>
+                <span>${item.name} (${item.weight}г)</span>
+                <span>${item.calories} ккал</span>
             `;
             foodListElement.appendChild(foodItem);
             
@@ -192,13 +192,13 @@ const App = {
             totalFats += parseFloat(item.fats);
         });
         
-        // ��������� �������� ������
+        // Добавляем итоговую строку
         if (this.foodHistory.length > 1) {
             const totalsItem = document.createElement('div');
             totalsItem.className = 'food-item';
             totalsItem.innerHTML = `
-                <span>�����:</span>
-                <span>${totalCalories} ���� (�: ${totalProtein.toFixed(1)}�, �: ${totalFats.toFixed(1)}�)</span>
+                <span>Итого:</span>
+                <span>${totalCalories} ккал (Б: ${totalProtein.toFixed(1)}г, Ж: ${totalFats.toFixed(1)}г)</span>
             `;
             foodListElement.appendChild(totalsItem);
         }
@@ -212,5 +212,5 @@ const App = {
     }
 };
 
-// ������������� ����������
+// Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => App.init());
