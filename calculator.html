@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расчет калорий</title>
-    <link rel="stylesheet" href="CalculatorCal/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="calculator-container">
         <h1>Расчет калорийности</h1>
         
+    <div class="input-section">
+
         <div class="input-section">
             <div class="input-group">
                 <label for="food">Блюдо:</label>
                 <div class="food-input-container">
                     <input type="text" id="food" placeholder="Название блюда" list="foodList">
-                    <button id="saveFoodBtn" class="small-btn">Сохр</button>
+                    <button id="saveFoodBtn" class="small-btn">💾</button>
                 </div>
                 <datalist id="foodList"></datalist>
             </div>
@@ -76,6 +78,6 @@
             </div>
         </div>
     </div>
-    <script src="CalculatorCal/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
